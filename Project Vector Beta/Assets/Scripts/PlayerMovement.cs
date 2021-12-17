@@ -18,9 +18,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float sprintSpeed = 6f;
     //[SerializeField] float crouchSpeed = 2f;
     [SerializeField] float acceleration = 10f;
+    [SerializeField] CameraShake cameraShake;
 
     [Header("Jumping")]
     public float jumpForce = 5f;
+    public float gravityDownForce = 20f;
 
     [Header("Keybinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
@@ -83,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
-
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
     }
 
@@ -108,11 +109,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(sprintKey) && isGrounded)
         {
-            moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
+            //moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
+            moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration); 
         }
         else
         {
-            moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration * Time.deltaTime);
+            //moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration * Time.deltaTime);
+            moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration);
         }
     }
 
@@ -147,6 +150,7 @@ public class PlayerMovement : MonoBehaviour
         else if (!isGrounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier * airMultiplier, ForceMode.Acceleration);
+            rb.velocity += Vector3.down * gravityDownForce * Time.deltaTime;
         }
     }
 }
