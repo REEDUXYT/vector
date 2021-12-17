@@ -124,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration); 
         }
         else if (Input.GetKey(sprintKey) && isWalled)
+        //else if (isWalled)
         {
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration);
         }
@@ -161,6 +162,10 @@ public class PlayerMovement : MonoBehaviour
         else if (isGrounded && OnSlope())
         {
             rb.AddForce(slopeMoveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
+        }
+        else if (!isGrounded && isWalled)
+        {
+            rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier * airMultiplier, ForceMode.Acceleration);
         }
         else if (!isGrounded)
         {
