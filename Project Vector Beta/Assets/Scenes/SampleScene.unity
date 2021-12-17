@@ -673,6 +673,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &785492863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 785492864}
+  m_Layer: 0
+  m_Name: Wall Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &785492864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785492863}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1831358499}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &851688861
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,7 +911,7 @@ GameObject:
   - component: {fileID: 873790051}
   - component: {fileID: 873790050}
   - component: {fileID: 873790049}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -977,7 +1008,7 @@ GameObject:
   - component: {fileID: 1160363111}
   - component: {fileID: 1160363110}
   - component: {fileID: 1160363109}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1171,7 +1202,7 @@ GameObject:
   - component: {fileID: 1750409665}
   - component: {fileID: 1750409664}
   - component: {fileID: 1750409663}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1295,7 +1326,6 @@ MonoBehaviour:
   walkSpeed: 4
   sprintSpeed: 8
   acceleration: 10
-  cameraShake: {fileID: 1831358502}
   jumpForce: 15
   gravityDownForce: 30
   jumpKey: 32
@@ -1303,9 +1333,13 @@ MonoBehaviour:
   groundDrag: 6
   airDrag: 1
   groundCheck: {fileID: 400526039}
+  wallCheck: {fileID: 785492864}
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!54 &1831358498
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1338,6 +1372,7 @@ Transform:
   - {fileID: 594231066}
   - {fileID: 183309825}
   - {fileID: 400526039}
+  - {fileID: 785492864}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1406,7 +1441,7 @@ GameObject:
   - component: {fileID: 1960776050}
   - component: {fileID: 1960776049}
   - component: {fileID: 1960776048}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

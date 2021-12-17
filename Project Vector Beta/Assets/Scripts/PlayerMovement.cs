@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float sprintSpeed = 6f;
     //[SerializeField] float crouchSpeed = 2f;
     [SerializeField] float acceleration = 10f;
-    [SerializeField] CameraShake cameraShake;
 
     [Header("Jumping")]
     public float jumpForce = 5f;
@@ -38,9 +37,13 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Ground Detection")]
     [SerializeField] Transform groundCheck;
+    [SerializeField] Transform wallCheck;
     [SerializeField] LayerMask groundMask;
+    [SerializeField] LayerMask wallMask;
     bool isGrounded;
+    bool isWalled;
     float groundDistance = 0.4f;
+    float wallDistance = 0.6f;
 
     Vector3 moveDirection;
     Vector3 slopeMoveDirection;
@@ -74,8 +77,16 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isWalled = Physics.CheckSphere(wallCheck.position, wallDistance, wallMask);
 
-        //print(isGrounded);
+        if (isGrounded)
+        {
+            print("The Player is Grounded.");
+        }
+        else if (isWalled)
+        {
+            print("The Player is Walled.");
+        }
 
         MyInput();
         ControlDrag();
@@ -111,6 +122,10 @@ public class PlayerMovement : MonoBehaviour
         {
             //moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration); 
+        }
+        else if (Input.GetKey(sprintKey) && isWalled)
+        {
+            moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration);
         }
         else
         {
