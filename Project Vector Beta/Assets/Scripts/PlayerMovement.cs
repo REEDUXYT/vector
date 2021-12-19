@@ -7,21 +7,22 @@ public class PlayerMovement : MonoBehaviour
     float playerHeight = 2f;
 
     [SerializeField] Transform orientation;
+    [Header("Camera")]
+    [SerializeField] private Camera cam;
+    [SerializeField] private float fov;
+    [SerializeField] private float fovSprint;
+    [SerializeField] private float sprintFovTime;
 
     [Header("Movement")]
     public float moveSpeed = 6f;
     float movementMultiplier = 10f;
+    [SerializeField] float acceleration = 10f;
     [SerializeField] float airMultiplier = 0.2f;
 
     [Header("Sprinting")]
     [SerializeField] float walkSpeed = 4f;
     [SerializeField] float sprintSpeed = 6f;
     //[SerializeField] float crouchSpeed = 2f;
-    [SerializeField] float acceleration = 10f;
-    [SerializeField] private Camera cam;
-    [SerializeField] private float fov;
-    [SerializeField] private float fovSprint;
-    [SerializeField] private float sprintFovTime;
 
     [Header("Jumping")]
     public float jumpForce = 5f;
@@ -166,6 +167,7 @@ public class PlayerMovement : MonoBehaviour
         else if (isGrounded && OnSlope())
         {
             rb.AddForce(slopeMoveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
+            rb.useGravity = false;
         }
         else if (!isGrounded && isWalled && Input.GetKey(sprintKey))
         {
