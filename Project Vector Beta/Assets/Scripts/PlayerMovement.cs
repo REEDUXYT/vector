@@ -18,6 +18,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float sprintSpeed = 6f;
     //[SerializeField] float crouchSpeed = 2f;
     [SerializeField] float acceleration = 10f;
+    [SerializeField] private Camera cam;
+    [SerializeField] private float fov;
+    [SerializeField] private float fovSprint;
+    [SerializeField] private float sprintFovTime;
 
     [Header("Jumping")]
     public float jumpForce = 5f;
@@ -85,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (isWalled)
         {
-            print("The Player is Walled.");
+            print("The Player is touching a Wall.");
         }
 
         MyInput();
@@ -118,20 +122,20 @@ public class PlayerMovement : MonoBehaviour
 
     void ControlSpeed()
     {
-        if (Input.GetKey(sprintKey) && isGrounded)
+        if (Input.GetKey(sprintKey) && Input.GetKey(KeyCode.W) && (isGrounded))
         {
-            //moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
-            moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration); 
+            moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fovSprint, sprintFovTime * Time.deltaTime);
         }
-        else if (Input.GetKey(sprintKey) && isWalled)
-        //else if (isWalled)
+        else if (Input.GetKey(sprintKey) && Input.GetKey(KeyCode.W) && (isWalled))
+        
         {
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration);
         }
         else
         {
-            //moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration * Time.deltaTime);
             moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, sprintFovTime * Time.deltaTime);
         }
     }
 
@@ -163,7 +167,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(slopeMoveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
         }
-        else if (!isGrounded && isWalled)
+        else if (!isGrounded && isWalled && Input.GetKey(sprintKey))
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier * airMultiplier, ForceMode.Acceleration);
         }

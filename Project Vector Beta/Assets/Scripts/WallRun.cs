@@ -56,12 +56,12 @@ public class WallRun : MonoBehaviour
 
         if (CanWallRun())
         {
-            if (wallLeft)
+            if (wallLeft && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
             {
                 StartWallRun();
                 Debug.Log("Wall running on the Left.");
             }
-            else if (wallRight)
+            else if (wallRight && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
             {
                 StartWallRun();
                 Debug.Log("Wall running on the Right.");
@@ -79,36 +79,38 @@ public class WallRun : MonoBehaviour
 
     void StartWallRun()
     {
-        rb.useGravity = false;
+        
+            rb.useGravity = false;
 
-        rb.AddForce(Vector3.down * wallRunGravity, ForceMode.Force);
+            rb.AddForce(Vector3.down * wallRunGravity, ForceMode.Force);
 
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, wallRunfov, wallRunfovTime * Time.deltaTime);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, wallRunfov, wallRunfovTime * Time.deltaTime);
 
-        if (wallLeft)
-        {
-            tilt = Mathf.Lerp(tilt, -camTilt, camTiltTime * Time.deltaTime);
-        }
-        else if (wallRight)
-        {
-            tilt = Mathf.Lerp(tilt, camTilt, camTiltTime * Time.deltaTime);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
             if (wallLeft)
             {
-                Vector3 wallRunJumpDirection = transform.up + leftWallHit.normal;
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(wallRunJumpDirection * wallRunJumpForce * 100, ForceMode.Force);
+                tilt = Mathf.Lerp(tilt, -camTilt, camTiltTime * Time.deltaTime);
             }
             else if (wallRight)
             {
-                Vector3 wallRunJumpDirection = transform.up + rightWallHit.normal;
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(wallRunJumpDirection * wallRunJumpForce * 100, ForceMode.Force);
+                tilt = Mathf.Lerp(tilt, camTilt, camTiltTime * Time.deltaTime);
             }
-        }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (wallLeft)
+                {
+                    Vector3 wallRunJumpDirection = transform.up + leftWallHit.normal;
+                    rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                    rb.AddForce(wallRunJumpDirection * wallRunJumpForce * 100, ForceMode.Force);
+                }
+                else if (wallRight)
+                {
+                    Vector3 wallRunJumpDirection = transform.up + rightWallHit.normal;
+                    rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                    rb.AddForce(wallRunJumpDirection * wallRunJumpForce * 100, ForceMode.Force);
+                }
+            }
+        
     }
 
     void StopWallRun()

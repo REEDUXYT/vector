@@ -302,6 +302,7 @@ Transform:
   - {fileID: 1160363108}
   - {fileID: 1750409662}
   - {fileID: 1519395000}
+  - {fileID: 408390785}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -451,6 +452,103 @@ Transform:
   m_Father: {fileID: 1831358499}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &408390784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 408390785}
+  - component: {fileID: 408390788}
+  - component: {fileID: 408390787}
+  - component: {fileID: 408390786}
+  m_Layer: 6
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &408390785
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408390784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.6, y: 4.7, z: -20.6}
+  m_LocalScale: {x: 16.35, y: 0.98, z: 7.47}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 151266196}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &408390786
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408390784}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &408390787
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408390784}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &408390788
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408390784}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &594231065
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +593,7 @@ GameObject:
   - component: {fileID: 646106054}
   - component: {fileID: 646106053}
   m_Layer: 6
-  m_Name: Cube (3)
+  m_Name: JumpCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -815,7 +913,7 @@ GameObject:
   - component: {fileID: 858011218}
   - component: {fileID: 858011217}
   m_Layer: 6
-  m_Name: Cube (2)
+  m_Name: Slope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -912,7 +1010,7 @@ GameObject:
   - component: {fileID: 873790050}
   - component: {fileID: 873790049}
   m_Layer: 7
-  m_Name: Cube
+  m_Name: Wall 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -926,8 +1024,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 873790047}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.51, y: 0.5, z: -16.02}
-  m_LocalScale: {x: 20, y: 15, z: 1.5}
+  m_LocalPosition: {x: 22.45, y: 0.55, z: 4.1}
+  m_LocalScale: {x: 12.2, y: 12.07, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 151266196}
@@ -1009,7 +1107,7 @@ GameObject:
   - component: {fileID: 1160363110}
   - component: {fileID: 1160363109}
   m_Layer: 7
-  m_Name: Cube (4)
+  m_Name: Wall 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1023,8 +1121,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160363107}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.93, y: 0.5, z: -16.02}
-  m_LocalScale: {x: 20, y: 15, z: 1.5}
+  m_LocalPosition: {x: -3.5, y: 2.4, z: -17.3}
+  m_LocalScale: {x: 43.2, y: 15, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 151266196}
@@ -1106,7 +1204,7 @@ GameObject:
   - component: {fileID: 1519395002}
   - component: {fileID: 1519395001}
   m_Layer: 6
-  m_Name: Cube (6)
+  m_Name: JumpBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1203,7 +1301,7 @@ GameObject:
   - component: {fileID: 1750409664}
   - component: {fileID: 1750409663}
   m_Layer: 7
-  m_Name: Cube (5)
+  m_Name: Wall 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1217,8 +1315,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750409661}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.54, y: 0.5, z: -21.87}
-  m_LocalScale: {x: 20, y: 15, z: 1.5}
+  m_LocalPosition: {x: 2.3, y: 4.6, z: -23.3}
+  m_LocalScale: {x: 59.57, y: 14.6, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 151266196}
@@ -1323,15 +1421,19 @@ MonoBehaviour:
   orientation: {fileID: 183309825}
   moveSpeed: 0
   airMultiplier: 0.4
-  walkSpeed: 4
+  walkSpeed: 5
   sprintSpeed: 8
   acceleration: 10
+  cam: {fileID: 249784841}
+  fov: 90
+  fovSprint: 95
+  sprintFovTime: 20
   jumpForce: 15
   gravityDownForce: 25
   jumpKey: 32
   sprintKey: 304
   groundDrag: 6
-  airDrag: 1
+  airDrag: 2
   groundCheck: {fileID: 400526039}
   wallCheck: {fileID: 785492864}
   groundMask:
@@ -1408,7 +1510,7 @@ MonoBehaviour:
   orientation: {fileID: 183309825}
   wallDistance: 0.6
   minimumJumpHeight: 1.5
-  wallRunGravity: 0
+  wallRunGravity: 0.5
   wallRunJumpForce: 6
   cam: {fileID: 249784841}
   fov: 90
@@ -1442,7 +1544,7 @@ GameObject:
   - component: {fileID: 1960776049}
   - component: {fileID: 1960776048}
   m_Layer: 7
-  m_Name: Cube (1)
+  m_Name: Wall 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1456,7 +1558,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960776046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.64, y: 0.5, z: -22.53}
+  m_LocalPosition: {x: 20.1, y: -0.62, z: 9.59}
   m_LocalScale: {x: 20, y: 15, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
