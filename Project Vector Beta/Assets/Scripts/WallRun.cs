@@ -25,7 +25,6 @@ public class WallRun : MonoBehaviour
 
     public float tilt { get; private set; }
  
-
     bool wallLeft = false;
     bool wallRight = false;
 
@@ -79,11 +78,8 @@ public class WallRun : MonoBehaviour
 
     void StartWallRun()
     {
-        
             rb.useGravity = false;
-
             rb.AddForce(Vector3.down * wallRunGravity, ForceMode.Force);
-
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, wallRunfov, wallRunfovTime * Time.deltaTime);
 
             if (wallLeft)
@@ -110,13 +106,11 @@ public class WallRun : MonoBehaviour
                     rb.AddForce(wallRunJumpDirection * wallRunJumpForce * 100, ForceMode.Force);
                 }
             }
-        
     }
 
     void StopWallRun()
     {
         rb.useGravity = true;
-
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, wallRunfovTime * Time.deltaTime);
         tilt = Mathf.Lerp(tilt, 0, camTiltTime * Time.deltaTime);
     }
