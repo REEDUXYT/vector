@@ -775,7 +775,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be63d2f368e9ab342a18aa587e58fdd1, type: 2}
+  - {fileID: 2100000, guid: fd3984b18e439ee42addfe7eb5d3c849, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1095,7 +1095,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be63d2f368e9ab342a18aa587e58fdd1, type: 2}
+  - {fileID: 2100000, guid: fd3984b18e439ee42addfe7eb5d3c849, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1386,7 +1386,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be63d2f368e9ab342a18aa587e58fdd1, type: 2}
+  - {fileID: 2100000, guid: fd3984b18e439ee42addfe7eb5d3c849, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1525,7 +1525,6 @@ GameObject:
   - component: {fileID: 1831358498}
   - component: {fileID: 1831358497}
   - component: {fileID: 1831358500}
-  - component: {fileID: 1831358501}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1550,15 +1549,24 @@ MonoBehaviour:
   fov: 90
   fovSprint: 95
   sprintFovTime: 20
+  wallRunFov: 100
+  wallRunFovTime: 20
+  camTilt: 20
+  camTiltTime: 20
   moveSpeed: 0
-  acceleration: 10
-  airMultiplier: 0.4
   walkSpeed: 5
   sprintSpeed: 8
+  crouchSpeed: 2
+  acceleration: 10
+  airMultiplier: 0.4
   jumpForce: 20
   gravityDownForce: 35
+  jumpCounter: 0
+  wallRunGravity: 0.5
+  wallRunJumpForce: 6
   jumpKey: 32
   sprintKey: 304
+  crouchKey: 306
   groundDrag: 6
   airDrag: 2
   groundCheck: {fileID: 400526039}
@@ -1569,6 +1577,9 @@ MonoBehaviour:
   wallMask:
     serializedVersion: 2
     m_Bits: 128
+  groundDistance: 0.4
+  wallDistance: 0.6
+  minimumJumpHeight: 1.5
 --- !u!54 &1831358498
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1617,34 +1628,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f840542ce5eba3d479772b469ae48844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallRun: {fileID: 1831358501}
+  playerMovement: {fileID: 1831358497}
   sensX: 100
   sensY: 100
   cam: {fileID: 103167713}
   orientation: {fileID: 183309825}
---- !u!114 &1831358501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831358496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 001fafe1e2c76834a84cc7a21f726fc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orientation: {fileID: 183309825}
-  wallDistance: 0.6
-  minimumJumpHeight: 1.5
-  wallRunGravity: 0.5
-  wallRunJumpForce: 6
-  cam: {fileID: 249784841}
-  fov: 90
-  wallRunfov: 100
-  wallRunfovTime: 20
-  camTilt: 20
-  camTiltTime: 20
 --- !u!1 &1960776046
 GameObject:
   m_ObjectHideFlags: 0

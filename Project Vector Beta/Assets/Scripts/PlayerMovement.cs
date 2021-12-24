@@ -12,28 +12,38 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float fov;
     [SerializeField] private float fovSprint;
     [SerializeField] private float sprintFovTime;
+    [SerializeField] private float wallRunFov;
+    [SerializeField] private float wallRunFovTime;
+    [SerializeField] private float camTilt;
+    [SerializeField] private float camTiltTime;
+    public float tilt { get; private set; }
 
     [Header("Movement")]
     public float moveSpeed = 6f;
     float movementMultiplier = 10f;
+    [SerializeField] float walkSpeed = 5f;
+    [SerializeField] float sprintSpeed = 8f;
+    [SerializeField] float crouchSpeed = 2f;
     [SerializeField] float acceleration = 10f;
-    [SerializeField] float airMultiplier = 0.2f;
-
-    [Header("Sprinting")]
-    [SerializeField] float walkSpeed = 4f;
-    [SerializeField] float sprintSpeed = 6f;
-    //[SerializeField] float crouchSpeed = 2f;
+    [SerializeField] float airMultiplier = 0.4f;
 
     [Header("Jumping")]
-    public float jumpForce = 5f;
-    public float gravityDownForce = 20f;
-
+    public float jumpForce = 20f;
+    public float gravityDownForce = 35f;
     public float jumpCounter = 0f;
+
+    [Header("Wall Running")]
+    [SerializeField] private float wallRunGravity;
+    [SerializeField] private float wallRunJumpForce;
+    bool wallLeft = false;
+    bool wallRight = false;
+    RaycastHit leftWallHit;
+    RaycastHit rightWallHit;
 
     [Header("Keybinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
     [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
-    //[SerializeField] KeyCode crouchKey = KeyCode.LeftCtrl;
+    [SerializeField] KeyCode crouchKey = KeyCode.LeftControl;
 
     [Header("Drag")]
     [SerializeField] float groundDrag = 6f;
@@ -42,16 +52,17 @@ public class PlayerMovement : MonoBehaviour
     float horizontalMovement;
     float verticalMovement;
 
-    [Header("Ground Detection")]
+    [Header("Detection")]
     [SerializeField] Transform groundCheck;
     [SerializeField] Transform wallCheck;
     [SerializeField] LayerMask groundMask;
     [SerializeField] LayerMask wallMask;
+    [SerializeField] float groundDistance = 0.4f;
+    [SerializeField] private float wallDistance = 0.6f;
+    [SerializeField] private float minimumJumpHeight = 1.5f;
     bool isGrounded;
     bool isWalled;
-    float groundDistance = 0.4f;
-    float wallDistance = 0.6f;
-
+    
     Vector3 moveDirection;
     Vector3 slopeMoveDirection;
 
@@ -75,6 +86,11 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
+    bool CanWallRun()
+    {
+        return !Physics.Raycast(transform.position, Vector3.down, minimumJumpHeight);
+    }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -95,12 +111,41 @@ public class PlayerMovement : MonoBehaviour
             print("The Player is touching a Wall.");
         }
 
+        if (CanWallRun() && isWalled)
+        {
+            if (wallLeft && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+            {
+                StartWallRun();
+                Debug.Log("Wall running on the Left.");
+            }
+            else if (wallRight && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+            {
+                StartWallRun();
+                Debug.Log("Wall running on the Right.");
+            }
+            else
+            {
+                StopWallRun();
+            }
+        }
+        else
+        {
+            StopWallRun();
+        }
+
         MyInput();
         ControlDrag();
         ControlSpeed();
         Jump();
+        CheckWall();
 
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
+    }
+
+    void CheckWall()
+    {
+        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftWallHit, wallDistance);
+        wallRight = Physics.Raycast(transform.position, orientation.right, out rightWallHit, wallDistance);
     }
 
     void MyInput()
@@ -149,13 +194,16 @@ public class PlayerMovement : MonoBehaviour
         {
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration);
         }
+        else if (Input.GetKey(crouchKey) && (isGrounded))
+        {
+            moveSpeed = Mathf.Lerp(moveSpeed, crouchSpeed, acceleration);
+        }
         else
         {
             moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration);
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, sprintFovTime * Time.deltaTime);
         }
     }
-
 
     void ControlDrag()
     {
@@ -194,5 +242,44 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier * airMultiplier, ForceMode.Acceleration);
             rb.velocity += Vector3.down * gravityDownForce * Time.deltaTime;
         }
+    }
+
+    void StartWallRun()
+    {
+        rb.useGravity = false;
+        rb.AddForce(Vector3.down * wallRunGravity, ForceMode.Force);
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, wallRunFov, wallRunFovTime * Time.deltaTime);
+
+        if (wallLeft)
+        {
+            tilt = Mathf.Lerp(tilt, -camTilt, camTiltTime * Time.deltaTime);
+        }
+        else if (wallRight)
+        {
+            tilt = Mathf.Lerp(tilt, camTilt, camTiltTime * Time.deltaTime);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (wallLeft)
+            {
+                Vector3 wallRunJumpDirection = transform.up + leftWallHit.normal;
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                rb.AddForce(wallRunJumpDirection * wallRunJumpForce * 100, ForceMode.Force);
+            }
+            else if (wallRight)
+            {
+                Vector3 wallRunJumpDirection = transform.up + rightWallHit.normal;
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                rb.AddForce(wallRunJumpDirection * wallRunJumpForce * 100, ForceMode.Force);
+            }
+        }
+    }
+
+    void StopWallRun()
+    {
+        rb.useGravity = true;
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, wallRunFovTime * Time.deltaTime);
+        tilt = Mathf.Lerp(tilt, 0, camTiltTime * Time.deltaTime);
     }
 }
