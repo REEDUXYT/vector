@@ -113,23 +113,23 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(jumpKey) && isGrounded && jumpCounter == 0)
+        if (Input.GetKeyDown(jumpKey) && (isGrounded) && jumpCounter == 0)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         }
-        else if (Input.GetKeyDown(jumpKey) && isGrounded && jumpCounter == 1)
+        else if (Input.GetKeyDown(jumpKey) && (isGrounded) && jumpCounter == 1)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
             jumpCounter = 2f;
         }
-        else if (Input.GetKeyDown(jumpKey) && isGrounded && jumpCounter == 2)
+        else if (Input.GetKeyDown(jumpKey) && (isGrounded) && jumpCounter == 2)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         }
-        else if (Input.GetKeyDown(jumpKey) && !isGrounded && jumpCounter == 2)
+        else if (Input.GetKeyDown(jumpKey) && (!isGrounded) && (!isWalled) && jumpCounter == 2)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
