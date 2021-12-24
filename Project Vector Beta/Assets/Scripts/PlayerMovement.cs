@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 5f;
     public float gravityDownForce = 20f;
 
+    public float jumpCounter = 0f;
+
     [Header("Keybinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
     [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
@@ -96,11 +98,8 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         ControlDrag();
         ControlSpeed();
+        Jump();
 
-        if (Input.GetKeyDown(jumpKey) && isGrounded)
-        {
-            Jump();
-        }
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
     }
 
@@ -114,10 +113,27 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if (isGrounded)
+        if (Input.GetKeyDown(jumpKey) && isGrounded && jumpCounter == 0)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        }
+        else if (Input.GetKeyDown(jumpKey) && isGrounded && jumpCounter == 1)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            jumpCounter = 2f;
+        }
+        else if (Input.GetKeyDown(jumpKey) && isGrounded && jumpCounter == 2)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        }
+        else if (Input.GetKeyDown(jumpKey) && !isGrounded && jumpCounter == 2)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            jumpCounter = 1f;
         }
     }
 
