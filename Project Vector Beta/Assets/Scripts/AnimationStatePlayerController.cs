@@ -10,6 +10,7 @@ public class AnimationStatePlayerController : MonoBehaviour
     int isRifleStrafingLeftHash;
     int isRifleStrafingRightHash;
     int isRifleWalkingBackwardsHash;
+    int isRifleJumpingHash;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class AnimationStatePlayerController : MonoBehaviour
         isRifleStrafingLeftHash = Animator.StringToHash("isRifleStrafingLeft");
         isRifleStrafingRightHash = Animator.StringToHash("isRifleStrafingRight");
         isRifleWalkingBackwardsHash = Animator.StringToHash("isRifleWalkingBackwards");
+        isRifleJumpingHash = Animator.StringToHash("isRifleJumping");
     }
 
     // Update is called once per frame
@@ -30,12 +32,14 @@ public class AnimationStatePlayerController : MonoBehaviour
         bool isRifleStrafingLeft = animator.GetBool(isRifleStrafingLeftHash);
         bool isRifleStrafingRight = animator.GetBool(isRifleStrafingRightHash);
         bool isRifleWalkingBackwards = animator.GetBool(isRifleWalkingBackwardsHash);
+        bool isRifleJumping = animator.GetBool(isRifleJumpingHash);
 
         bool forwardKeypress = Input.GetKey("w");
         bool runningKeypress = Input.GetKey("left shift");
         bool leftKeypress = Input.GetKey("a");
         bool rightKeypress = Input.GetKey("d");
         bool backwardKeypress = Input.GetKey("s");
+        bool jumpKeypress = Input.GetKey("space");
 
         if (!isRifleWalking && forwardKeypress)
         {
@@ -85,6 +89,11 @@ public class AnimationStatePlayerController : MonoBehaviour
         if (isRifleWalkingBackwards && !backwardKeypress)
         {
             animator.SetBool(isRifleWalkingBackwardsHash, false);
+        }
+
+        if (!isRifleJumping && jumpKeypress)
+        {
+            animator.SetBool(isRifleJumpingHash, true);
         }
     }
 }
