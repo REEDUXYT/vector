@@ -61,7 +61,7 @@ public class AnimationStatePlayerController : MonoBehaviour
             animator.SetBool(isRifleRunningHash, false);
         }
 
-        if (!isRifleStrafingLeft && leftKeypress)
+        if (!isRifleStrafingLeft && leftKeypress && !runningKeypress)
         {
             animator.SetBool(isRifleStrafingLeftHash, true);
         }
@@ -71,7 +71,7 @@ public class AnimationStatePlayerController : MonoBehaviour
             animator.SetBool(isRifleStrafingLeftHash, false);
         }
 
-        if (!isRifleStrafingRight && rightKeypress)
+        if (!isRifleStrafingRight && rightKeypress && !runningKeypress)
         {
             animator.SetBool(isRifleStrafingRightHash, true);
         }
