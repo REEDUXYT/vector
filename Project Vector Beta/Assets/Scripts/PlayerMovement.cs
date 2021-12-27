@@ -104,11 +104,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded)
         {
-            print("The Player is Grounded.");
+            Debug.Log("The Player is Grounded.");
         }
         else if (isWalled)
         {
-            print("The Player is touching a Wall.");
+            Debug.Log("The Player is touching a Wall.");
         }
 
         if (CanWallRun() && isWalled)
