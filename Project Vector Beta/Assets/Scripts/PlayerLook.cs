@@ -12,7 +12,6 @@ public class PlayerLook : MonoBehaviour
 
     [SerializeField] Transform cam;
     [SerializeField] Transform orientation;
-    [SerializeField] Transform playerBody;
 
     float mouseX;
     float mouseY;
@@ -28,13 +27,13 @@ public class PlayerLook : MonoBehaviour
         Cursor.visible = false;
     }
 
+
     private void Update()
     {
         MyInput();
-
         cam.transform.rotation = Quaternion.Euler(xRotation, yRotation, playerMovement.tilt);
         orientation.transform.rotation = Quaternion.Euler(0, yRotation, 0);
-        playerBody.Rotate(Vector3.up * mouseX);
+        //playerBody.Rotate(Vector3.up * mouseX);
     }
 
     void MyInput()
