@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 1007
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -189,8 +189,8 @@ MonoBehaviour:
     y: 0
     width: 346
     height: 678
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -272,8 +272,8 @@ MonoBehaviour:
     y: 0
     width: 414
     height: 957
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -320,22 +320,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Materials/Gridbox Prototype Materials/Materials/Standard
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Materials/Gridbox Prototype Materials/Materials/Standard
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Projects\vector\Project Vector Beta
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 22660000
-    m_LastClickedID: 26146
-    m_ExpandedIDs: 0000000020660000
+    scrollPos: {x: 0, y: 6}
+    m_SelectedIDs: 0c640000
+    m_LastClickedID: 25612
+    m_ExpandedIDs: 00000000986300009e630000ac630000ce630000d4630000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000000000000649600008a6b0000e26d0000106f00002a700000447100005e72000078730000ec770000ec8e0000fc5e000094bb00006ac50000a6e00000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -450,9 +450,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 0af5ffff
-      m_LastClickedID: -2806
-      m_ExpandedIDs: 9ef8ffff
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 9ef8ffffc85e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -712,9 +712,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -12.281442, y: -2.9902046, z: 1.6083667}
+    m_Target: {x: 2.6387062, y: -9.76804, z: -24.539988}
     speed: 2
-    m_Value: {x: -12.281442, y: -2.9902046, z: 1.6083667}
+    m_Value: {x: 2.6387062, y: -9.76804, z: -24.539988}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -761,13 +761,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.13786273, y: -0.6853937, z: 0.13580303, w: 0.70218253}
+    m_Target: {x: 0.122125946, y: -0.87336373, z: 0.28758502, w: 0.37402016}
     speed: 2
-    m_Value: {x: 0.13784388, y: -0.6853, z: 0.13578446, w: 0.7020865}
+    m_Value: {x: 0.122109145, y: -0.87324363, z: 0.28754547, w: 0.37396872}
   m_Size:
-    m_Target: 8.011042
+    m_Target: 38.53207
     speed: 2
-    m_Value: 8.011042
+    m_Value: 38.53207
   m_Ortho:
     m_Target: 0
     speed: 2
