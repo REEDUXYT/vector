@@ -109,14 +109,8 @@ public class PlayerMovement : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
-        //Combining PlayerLook for ease of Networking. 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        if (!isLocalPlayer)
-        {
-            cam.gameObject.SetActive(false);
-        }
     }
 
     private void Update()

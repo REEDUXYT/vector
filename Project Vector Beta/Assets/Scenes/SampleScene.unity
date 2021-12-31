@@ -367,7 +367,6 @@ GameObject:
   m_Component:
   - component: {fileID: 423355796}
   - component: {fileID: 423355795}
-  - component: {fileID: 423355794}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -375,14 +374,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &423355794
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423355793}
-  m_Enabled: 1
 --- !u!20 &423355795
 Camera:
   m_ObjectHideFlags: 0
@@ -1222,7 +1213,7 @@ MonoBehaviour:
   PersistNetworkManagerToOfflineScene: 0
   runInBackground: 1
   autoStartServerBuild: 1
-  serverTickRate: 30
+  serverTickRate: 128
   offlineScene: 
   onlineScene: 
   transport: {fileID: 1727271611}

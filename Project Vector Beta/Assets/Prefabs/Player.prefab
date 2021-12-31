@@ -2459,10 +2459,11 @@ GameObject:
   - component: {fileID: 3242021362136376793}
   - component: {fileID: 3242021362136376792}
   - component: {fileID: 3242021362136376795}
+  - component: {fileID: 6426093280269025301}
   - component: {fileID: -8037667392429382954}
   - component: {fileID: 8254724868540314378}
-  - component: {fileID: 5592138249506806535}
   - component: {fileID: 5833930975879444038}
+  - component: {fileID: 5592138249506806535}
   - component: {fileID: 8547097197816114871}
   - component: {fileID: 8019341130746018244}
   m_Layer: 0
@@ -2561,6 +2562,23 @@ MonoBehaviour:
   minimumJumpHeight: 1.5
   sensX: 100
   sensY: 100
+--- !u!114 &6426093280269025301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3242021362136376794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352a7ac290b7212418df702f25feb25a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  cam: {fileID: 3242021360579829747}
+  playerBody: {fileID: 3406316112649934022}
+  playerJoints: {fileID: 1046133630420037127}
 --- !u!114 &-8037667392429382954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2593,6 +2611,22 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 293af9a090553de46948fbcb6c580d01
   hasSpawned: 0
+--- !u!114 &5833930975879444038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3242021362136376794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  animator: {fileID: 3242021361959782701}
 --- !u!114 &5592138249506806535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2622,22 +2656,6 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
---- !u!114 &5833930975879444038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3242021362136376794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 1
-  animator: {fileID: 3242021361959782701}
 --- !u!114 &8547097197816114871
 MonoBehaviour:
   m_ObjectHideFlags: 0
