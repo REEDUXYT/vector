@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class AnimationStatePlayerController : MonoBehaviour
+public class AnimationStatePlayerController : NetworkBehaviour
 {
-    Animator animator;
+    [SerializeField] public Animator animator;
+    //[SerializeField] NetworkAnimator netAnim;
+
     int isRifleWalkingHash;
     int isRifleRunningHash;
     int isRifleStrafingLeftHash;
@@ -15,7 +18,7 @@ public class AnimationStatePlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         isRifleWalkingHash = Animator.StringToHash("isRifleWalking");
         isRifleRunningHash = Animator.StringToHash("isRifleRunning");
         isRifleStrafingLeftHash = Animator.StringToHash("isRifleStrafingLeft");
@@ -27,6 +30,11 @@ public class AnimationStatePlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!hasAuthority)
+        {
+            return;
+        }
+
         bool isRifleWalking = animator.GetBool(isRifleWalkingHash);
         bool isRifleRunning = animator.GetBool(isRifleRunningHash);
         bool isRifleStrafingLeft = animator.GetBool(isRifleStrafingLeftHash);

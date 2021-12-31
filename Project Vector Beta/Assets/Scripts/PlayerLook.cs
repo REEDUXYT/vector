@@ -10,7 +10,7 @@ public class PlayerLook : MonoBehaviour
     [SerializeField] private float sensX = 100f;
     [SerializeField] private float sensY = 100f;
 
-    [SerializeField] Transform cam;
+    [SerializeField] Transform camHolder;
     [SerializeField] Transform orientation;
 
     float mouseX;
@@ -31,7 +31,7 @@ public class PlayerLook : MonoBehaviour
     private void Update()
     {
         MyInput();
-        cam.transform.rotation = Quaternion.Euler(xRotation, yRotation, playerMovement.tilt);
+        camHolder.transform.rotation = Quaternion.Euler(xRotation, yRotation, playerMovement.tilt);
         orientation.transform.rotation = Quaternion.Euler(0, yRotation, 0);
         //playerBody.Rotate(Vector3.up * mouseX);
     }

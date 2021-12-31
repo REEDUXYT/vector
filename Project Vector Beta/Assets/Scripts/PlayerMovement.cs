@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     float playerHeight = 2f;
 
     [SerializeField] Transform orientation;
     [Header("Camera")]
     [SerializeField] private Camera cam;
+    [SerializeField] Transform camHolder;
     [SerializeField] private float fov;
     [SerializeField] private float fovSprint;
     [SerializeField] private float sprintFovTime;
@@ -62,7 +64,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float minimumJumpHeight = 1.5f;
     bool isGrounded;
     bool isWalled;
-    
+
+    //Combining PlayerLook for ease of Networking.
+    [Header("Looking")]
+    [SerializeField] private float sensX = 100f;
+    [SerializeField] private float sensY = 100f;
+    float mouseX;
+    float mouseY;
+    float multiplier = 0.01f;
+    float xRotation;
+    float yRotation;
+    //May remove in the future. 
+
     Vector3 moveDirection;
     Vector3 slopeMoveDirection;
 
@@ -95,10 +108,25 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        //Combining PlayerLook for ease of Networking. 
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        if (!isLocalPlayer)
+        {
+            cam.gameObject.SetActive(false);
+        }
     }
 
     private void Update()
     {
+        //If not local player, don't run these methods.
+        if(!isLocalPlayer) 
+        { 
+            return;
+        }
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         isWalled = Physics.CheckSphere(wallCheck.position, wallDistance, wallMask);
 
@@ -140,6 +168,10 @@ public class PlayerMovement : MonoBehaviour
         CheckWall();
 
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
+
+        //Combining PlayerLook for ease of Networking.
+        camHolder.transform.rotation = Quaternion.Euler(xRotation, yRotation, tilt);
+        orientation.transform.rotation = Quaternion.Euler(0, yRotation, 0);
     }
 
     void CheckWall()
@@ -154,6 +186,13 @@ public class PlayerMovement : MonoBehaviour
         verticalMovement = Input.GetAxisRaw("Vertical");
 
         moveDirection = orientation.forward * verticalMovement + orientation.right * horizontalMovement;
+
+        //Combining PlayerLook for ease of Networking.
+        mouseX = Input.GetAxisRaw("Mouse X");
+        mouseY = Input.GetAxisRaw("Mouse Y");
+        yRotation += mouseX * sensX * multiplier;
+        xRotation -= mouseY * sensY * multiplier;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
     }
 
     void Jump()
