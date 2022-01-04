@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PlayerLook : MonoBehaviour
+public class PlayerLook : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] PlayerMovement playerMovement;
@@ -12,6 +13,8 @@ public class PlayerLook : MonoBehaviour
 
     [SerializeField] Transform camHolder;
     [SerializeField] Transform orientation;
+
+    RaycastWeapon weapon;
 
     float mouseX;
     float mouseY;
@@ -25,17 +28,24 @@ public class PlayerLook : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        weapon = GetComponentInChildren<RaycastWeapon>();
     }
 
 
     private void Update()
     {
         MyInput();
+        //Shoot();
+
         camHolder.transform.rotation = Quaternion.Euler(xRotation, yRotation, playerMovement.tilt);
         orientation.transform.rotation = Quaternion.Euler(0, yRotation, 0);
-        //playerBody.Rotate(Vector3.up * mouseX);
     }
 
+    private void LateUpdate()
+    {
+        Shoot();
+    }
     void MyInput()
     {
         mouseX = Input.GetAxisRaw("Mouse X");
@@ -45,5 +55,19 @@ public class PlayerLook : MonoBehaviour
         xRotation -= mouseY * sensY * multiplier;
 
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+    }
+
+    void Shoot()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            weapon.StartFiring();
+            //Debug.Log("The Player is firing.");
+        }
+        if (Input.GetButtonUp("Fire1"))
+        {
+            weapon.StopFiring();
+            //Debug.Log("The Player stopped firing.");
+        }
     }
 }

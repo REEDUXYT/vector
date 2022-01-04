@@ -1213,14 +1213,14 @@ MonoBehaviour:
   PersistNetworkManagerToOfflineScene: 0
   runInBackground: 1
   autoStartServerBuild: 1
-  serverTickRate: 128
+  serverTickRate: 60
   offlineScene: 
   onlineScene: 
   transport: {fileID: 1727271611}
   networkAddress: localhost
   maxConnections: 100
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 3242021362136376794, guid: 293af9a090553de46948fbcb6c580d01, type: 3}
+  playerPrefab: {fileID: 554253369690059704, guid: bdc8d57128706ed4395bd31ddd310494, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
