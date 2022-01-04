@@ -6,6 +6,7 @@ public class RaycastWeapon : MonoBehaviour
 {
     public bool isFiring = false;
     public ParticleSystem muzzleFlash;
+    public ParticleSystem hitEffect;
     public Transform raycastOrigin;
     public Transform raycastDestination;
 
@@ -21,7 +22,9 @@ public class RaycastWeapon : MonoBehaviour
         ray.direction = raycastDestination.position - raycastOrigin.position;
         if(Physics.Raycast(ray, out hitInfo))
         {
-            Debug.DrawLine(ray.origin, hitInfo.point, Color.red, 1.0f);
+            hitEffect.transform.position = hitInfo.point;
+            hitEffect.transform.forward = hitInfo.normal;
+            hitEffect.Emit(1);
         }
 
     }
