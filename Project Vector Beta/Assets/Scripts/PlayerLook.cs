@@ -36,16 +36,16 @@ public class PlayerLook : NetworkBehaviour
     private void Update()
     {
         MyInput();
-        //Shoot();
+        Shoot();
 
         camHolder.transform.rotation = Quaternion.Euler(xRotation, yRotation, playerMovement.tilt);
         orientation.transform.rotation = Quaternion.Euler(0, yRotation, 0);
     }
 
-    private void LateUpdate()
+    /*private void LateUpdate()
     {
         Shoot();
-    }
+    }*/
     void MyInput()
     {
         mouseX = Input.GetAxisRaw("Mouse X");
@@ -64,6 +64,11 @@ public class PlayerLook : NetworkBehaviour
             weapon.StartFiring();
             //Debug.Log("The Player is firing.");
         }
+        if (weapon.isFiring)
+        {
+            weapon.UpdateFiring(Time.deltaTime);
+        }
+        weapon.UpdateBullets(Time.deltaTime);
         if (Input.GetButtonUp("Fire1"))
         {
             weapon.StopFiring();
