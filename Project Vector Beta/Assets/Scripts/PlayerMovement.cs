@@ -27,6 +27,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] float crouchSpeed = 2f;
     [SerializeField] float acceleration = 10f;
     [SerializeField] float airMultiplier = 0.4f;
+    public bool isSprinting = false;
 
     [Header("Jumping")]
     public float jumpForce = 20f;
@@ -114,7 +115,7 @@ public class PlayerMovement : NetworkBehaviour
         }
         else if (isWalled)
         {
-            Debug.Log("The Player is touching a Wall.");
+            //Debug.Log("The Player is touching a Wall.");
         }
 
         if (CanWallRun() && isWalled)
@@ -194,20 +195,24 @@ public class PlayerMovement : NetworkBehaviour
         {
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration);
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fovSprint, sprintFovTime * Time.deltaTime);
+            isSprinting = true;
         }
         else if (Input.GetKey(sprintKey) && Input.GetKey(KeyCode.W) && (isWalled))
         
         {
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration);
+            isSprinting = true;
         }
         else if (Input.GetKey(crouchKey) && (isGrounded))
         {
             moveSpeed = Mathf.Lerp(moveSpeed, crouchSpeed, acceleration);
+            isSprinting = false;
         }
         else
         {
             moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration);
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, sprintFovTime * Time.deltaTime);
+            isSprinting = false;
         }
     }
 

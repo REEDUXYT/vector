@@ -59,7 +59,7 @@ public class PlayerLook : NetworkBehaviour
 
     void Shoot()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && (playerMovement.isSprinting == false))
         {
             weapon.StartFiring();
             //Debug.Log("The Player is firing.");
@@ -69,7 +69,8 @@ public class PlayerLook : NetworkBehaviour
             weapon.UpdateFiring(Time.deltaTime);
         }
         weapon.UpdateBullets(Time.deltaTime);
-        if (Input.GetButtonUp("Fire1"))
+        
+        if (Input.GetButtonUp("Fire1") || (playerMovement.isSprinting == true))
         {
             weapon.StopFiring();
             //Debug.Log("The Player stopped firing.");

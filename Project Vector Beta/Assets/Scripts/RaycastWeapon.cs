@@ -31,6 +31,9 @@ public class RaycastWeapon : MonoBehaviour
     List<Bullet> bullets = new List<Bullet>();
     float maxLifetime = 3.0f;
 
+    public AudioSource audioSource;
+    private float volume = 0.5f;
+
     Vector3 GetPosition(Bullet bullet)
     {
         Vector3 gravity = Vector3.down * bulletDrop;
@@ -51,12 +54,8 @@ public class RaycastWeapon : MonoBehaviour
 
     public void StartFiring()
     {
-        if (!(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W)))
-        {
-            isFiring = true;
-            accumulatedTime = 0.0f;
-            FireBullet();
-        }
+        isFiring = true;
+        accumulatedTime = 0.0f;
     }
 
     public void UpdateFiring(float deltaTime)
@@ -121,6 +120,7 @@ public class RaycastWeapon : MonoBehaviour
         Vector3 velocity = (raycastDestination.position - raycastOrigin.position).normalized * bulletSpeed;
         var bullet = CreateBullet(raycastOrigin.position, velocity);
         bullets.Add(bullet);
+        audioSource.PlayOneShot(audioSource.clip, volume);
     }
     public void StopFiring()
     {
